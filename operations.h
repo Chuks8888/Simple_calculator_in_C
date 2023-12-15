@@ -1,4 +1,4 @@
-# define Length 32
+# define Length 16
 
 #define sum(a, b) ((a)+(b))
 
