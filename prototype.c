@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-#define Length 32
+#include "operations.h" 
 
 void reallocate(void* previous)
 {
@@ -11,16 +10,23 @@ void reallocate(void* previous)
 	(void)realloc(previous, size*2);
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    char* operation;
-    operation = malloc(Length);
-    operation = fgets(operation, Length, stdin);
+	int equasion = 0;
 
 	int* numbers_storage = malloc(Length);
 	char* operands_storage = malloc(Length);
 
-	free(operation);
+	int j = 0, k = 0;
+	for(int i=0; i < argc - 1; i++)
+	{
+		if(j == sizeof(numbers_storage)) reallocate(numbers_storage);
+		if(k == sizeof(operands_storage)) reallocate(operands_storage);
+
+		printf("%d\n", i);
+	}
+
 	free(numbers_storage);
 	free(operands_storage);
+	return 0;
 }
