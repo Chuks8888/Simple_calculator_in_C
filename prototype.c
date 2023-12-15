@@ -4,17 +4,11 @@
 
 #define Length 32
 
-void reallocate(int* previous)
+void reallocate(void* previous)
 {
 	int size = sizeof(previous);
-	int *temp = malloc(size);
 
-	memcpy(temp, previous, size);
-
-	free(previous);
-	previous = malloc (size*2);
-
-	memcpy(previous, temp, size);
+	(void)realloc(previous, size*2);
 }
 
 int main()
@@ -22,5 +16,11 @@ int main()
     char* operation;
     operation = malloc(Length);
     operation = fgets(operation, Length, stdin);
-	
+
+	int* numbers_storage = malloc(Length);
+	char* operands_storage = malloc(Length);
+
+	free(operation);
+	free(numbers_storage);
+	free(operands_storage);
 }
