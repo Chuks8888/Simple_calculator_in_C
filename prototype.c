@@ -1,56 +1,48 @@
 #include <ctype.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include "operations.h" 
 
-void reallocate(int* previous,int iteration)
+/*void reallocate(int* previous,int iteration)
 {
+	printf("increasing memory for pointer\n");
+
 	int size = Length * iteration;
 	
-	int* temp = malloc(size);
+	int* temp = malloc(Length * iteration);
 	for(int i=0;i<size; i++)
-		*(temp+i) = *(previous+i);
+		temp[i] = previous[i];
 	
-	free(previous);
-	previous = malloc(size*2);
-
+	previous = malloc(Length*iteration*2);
 
 	for(int i=0;i<size; i++)
-		*(previous+i) = *(temp+i);
+		previous[i]=temp[i];
 
-	//realloc(previous, size*2);
-	free(temp);
-	printf("increasing memory for pointer\n");
-}
+	free(temp); 
+}*/
 
 int main(int argc, char* argv[])
 {
-	int equasion = 0;
+	int equals = 0;
+	int* numbers_storage = malloc( sizeof(int)*Length);
+	/*int* numbers_storage = (int*)malloc(Length * sizeof(int));*/
+	//char* operands_storage = malloc(Length);
 
-	int* numbers_storage = malloc(Length);
-	char* operands_storage = malloc(Length);
+	//int iteration = 1, iteration2 = 1;
 
-	int iteration = 1, iteration2 = 1;
+	int j = 0;
 
-	int j = 0, k = 1;
 	for(int i=1; i <= argc - 1; i++)
 	{
-		if(j == (Length * iteration))
-		{
-			reallocate(numbers_storage, iteration);
-			iteration++;
-		}
-		//if(k == sizeof(operands_storage)) reallocate(operands_storage, iteration2);
-		
-		if(atoi(argv[i]) > 0 || isdigit(*argv[i]) != 0)
+		if(atoi(argv[i]) > 0 || isdigit(argv[i]) != 0)
 		{
 			*(numbers_storage + j) = atoi(argv[i]);
-			j+=4;
+			j++;
+			printf("chechk argv = %d\n", atoi(argv[i]));
 		}
-		printf("%d ", *(numbers_storage + j - 4));
+		printf("%d\n", *(numbers_storage + j));
 	}
 	
 	free(numbers_storage);
-	free(operands_storage);
+	//free(operands_storage);
 }
