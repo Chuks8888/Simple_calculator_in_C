@@ -21,28 +21,26 @@
 	free(temp); 
 }*/
 
-int main(int argc, char* argv[])
+int main()
 {
-	int equals = 0;
+	char* operation = malloc(64);
+	fgets(operation, 64, stdin);
+
 	int* numbers_storage = malloc( sizeof(int)*Length);
-	/*int* numbers_storage = (int*)malloc(Length * sizeof(int));*/
-	//char* operands_storage = malloc(Length);
 
-	//int iteration = 1, iteration2 = 1;
+	*numbers_storage = 0;
 
-	int j = 0;
+	int j = 1; // index for numbers_storage
 
-	for(int i=1; i <= argc - 1; i++)
-	{
-		if(atoi(argv[i]) > 0 || isdigit(argv[i]) != 0)
-		{
-			*(numbers_storage + j) = atoi(argv[i]);
-			j++;
-			printf("chechk argv = %d\n", atoi(argv[i]));
-		}
-		printf("%d\n", *(numbers_storage + j));
+	for(int i=0; i<64; i++)
+	{ 
+		if(operation[i] == 10) 
+			break;
+
+
+		printf("%c\t value in int: %d\n", operation[i], operation[i]);
 	}
-	
+
 	free(numbers_storage);
 	//free(operands_storage);
 }
