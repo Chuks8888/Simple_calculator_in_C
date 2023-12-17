@@ -3,44 +3,75 @@
 #include <stdlib.h>
 #include "operations.h" 
 
-/*void reallocate(int* previous,int iteration)
+void reverse_polish(char* rpn, char* operands, char* numbers)
 {
-	printf("increasing memory for pointer\n");
-
-	int size = Length * iteration;
-	
-	int* temp = malloc(Length * iteration);
-	for(int i=0;i<size; i++)
-		temp[i] = previous[i];
-	
-	previous = malloc(Length*iteration*2);
-
-	for(int i=0;i<size; i++)
-		previous[i]=temp[i];
-
-	free(temp); 
-}*/
+	int j = 0, k = 0;
+	for(int i=0; i<Length;i++)
+	{
+		
+	}
+}
 
 int main()
 {
-	char* operation = malloc(64);
-	fgets(operation, 64, stdin);
+	char* operation = malloc(Length);
+	char* rpn = malloc(Length);
+	char* operands = malloc(Length);
+	char* numbers = malloc(Length);
 
-	int* numbers_storage = malloc( sizeof(int)*Length);
+	fgets(operation, Length, stdin);
 
-	*numbers_storage = 0;
+	int j=0, k=0;
 
-	int j = 1; // index for numbers_storage
-
-	for(int i=0; i<64; i++)
-	{ 
-		if(operation[i] == 10) 
+	for(int i=0;i<Length;i++)
+	{
+		if(operation[i] == 10)
+		{
+			operands[k] = 10;
+			numbers[j] = 10;
 			break;
+		}
+		
+		if(operation[i] == 32 || isdigit(operation[i])!=0)
+		{
+			numbers[j] = operation[i];
+			j++;
+			continue;
+		}
 
-
-		printf("%c\t value in int: %d\n", operation[i], operation[i]);
+		else
+		{
+			operands[k] = operation[i];
+			numbers[j] = 32;
+			k++;
+			j++;
+		}
 	}
 
-	free(numbers_storage);
-	//free(operands_storage);
+	for(int i=0;i<Length;i++)
+	{
+		if(numbers[i] == 10) break;
+		else printf("%c", numbers[i]);
+	}
+
+	printf("\n");
+
+	for(int i=0;i<Length;i++)
+	{
+		if(operands[i] == 10) break;
+		else printf("%c", operands[i]);
+	}
+	//reverse_polish(operation, rpn, operands);
+
+	/*for(int i=0; i<Length; i++)
+	{ 
+		if(rpn[i] == 10) 
+			break;
+		printf(" %d", rpn[i]);
+	}*/
+
+	free(operation);
+	free(rpn);
+	free(operands);
+	free(numbers);
 }
