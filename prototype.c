@@ -3,15 +3,6 @@
 #include <stdlib.h>
 #include "operations.h" 
 
-void reverse_polish(char* rpn, char* operands, char* numbers)
-{
-	int j = 0, k = 0;
-	for(int i=0; i<Length;i++)
-	{
-		
-	}
-}
-
 int main()
 {
 	char* operation = malloc(Length);
@@ -32,19 +23,31 @@ int main()
 			break;
 		}
 		
-		if(operation[i] == 32 || isdigit(operation[i])!=0)
+		if(isdigit(operation[i])!=0)
 		{
 			numbers[j] = operation[i];
 			j++;
 			continue;
 		}
 
-		else
+		else 
 		{
+			if(operation[i] == 32) break;
 			operands[k] = operation[i];
 			numbers[j] = 32;
 			k++;
 			j++;
+		}
+		if(k >= 2 && j >=2)
+		{
+			if(operands[k-1] == 45 || operands[k-1] == 43)
+			{
+				if(operands[k] == 42 || operands[k] == 47)
+					continue;
+
+				if(operands[k] == 40)
+					
+			}
 		}
 	}
 
@@ -61,14 +64,6 @@ int main()
 		if(operands[i] == 10) break;
 		else printf("%c", operands[i]);
 	}
-	//reverse_polish(operation, rpn, operands);
-
-	/*for(int i=0; i<Length; i++)
-	{ 
-		if(rpn[i] == 10) 
-			break;
-		printf(" %d", rpn[i]);
-	}*/
 
 	free(operation);
 	free(rpn);
