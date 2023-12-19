@@ -12,6 +12,26 @@ int power(int a, int n)
 	return a;
 }
 
+int equation(char operator, int n1, int n2)
+{
+	switch(operator)
+	{
+		case '+': 
+			return sum(n1, n2); 
+
+		case '-':
+			return diff(n1, n2);
+
+		case '*':
+			return product(n1, n2);
+
+		case '/':
+			return div(n1, n2);
+		
+		default: return 0;
+	}
+}
+
 int main()
 {
 	char* operation = malloc(Length);
@@ -24,8 +44,9 @@ int main()
 
 	for(int i=0;i<Length;i++)
 	{
-		// assigning values
-		temp = 0;
+
+		if(operation[i] == 32) 
+			continue;
 
 		if(operation[i] != 10)
 		{
@@ -45,11 +66,9 @@ int main()
 				
 				numbers[j] = temp;
 				j++;
-				i+=p;
+				i+=p-1;
 				continue;
 			}
-
-			if(operation[i] == 32) continue;
 
 			else
 			{
@@ -59,35 +78,10 @@ int main()
 		}
 		else 
 		{
+			i = Length;
 			operands[k] = 10;
 			k++; j++;
 		}
-
-		/*if(k >= 2 && j >=2)
-		{
-			if(operands[k-1] == 45 || operands[k-1] == 43)
-			{
-				if(operands[k] == 42 || operands[k] == 47)
-					continue;
-
-				if(operands[k] == 40)
-					continue;
-
-				if(operands[k] == 41)
-				{
-					k-=2;
-					// previous operation between numbers j and --j
-					 continue;
-				}
-				
-				if(operands[k] == 45 || operands[k] == 43)
-				{
-					//operation between numbers j and --j
-					operands[k-1] = operands[k];
-					k--;
-				}
-			}
-		}*/
 	}
 
 	for(int i=0;i<j;i++)
